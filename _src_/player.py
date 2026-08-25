@@ -52,13 +52,13 @@ class Player(Physics):
         if keys[pygame.K_s]:
             self.y_vel += WALK_ACCN
 
-        if self.x_vel ** 2 + self.y_vel ** 2 > WALK_SPEED ** 2:
-            theta = np.arctan2(np.abs(self.y_vel), np.abs(self.x_vel))
-            self.x_vel = np.sign(self.x_vel) * WALK_SPEED * np.cos(theta)
-            self.y_vel = np.sign(self.y_vel) * WALK_SPEED * np.sin(theta)
+        # if self.x_vel ** 2 + self.y_vel ** 2 > WALK_SPEED ** 2:
+        #     theta = np.arctan2(np.abs(self.y_vel), np.abs(self.x_vel))
+        #     self.x_vel = np.sign(self.x_vel) * WALK_SPEED * np.cos(theta)
+        #     self.y_vel = np.sign(self.y_vel) * WALK_SPEED * np.sin(theta)
 
-        self.x_vel = self.x_vel * 0.8
-        self.y_vel = self.y_vel * 0.8
+        # self.x_vel = self.x_vel * 0.8
+        # self.y_vel = self.y_vel * 0.8
 
 
     def playMove(self):
