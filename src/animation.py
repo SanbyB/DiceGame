@@ -4,7 +4,7 @@ from math import floor
 class Animation:
     def __init__(self, spritesheet, rowIndex, speed):
         self.spritesheet = spritesheet
-        self.rowIndex = rowIndex
+        self.yFrame = rowIndex
         self.frame = 0
         self.speed = speed
         return
@@ -14,15 +14,13 @@ class Animation:
         self.frame += self.speed
         return
 
-    def draw(self, surface, x, y, width, height, direction):
-        frame = floor(self.frame) % self.spritesheet.xFrames
-        frame = self.spritesheet.xFrames - 1 - frame if direction else frame
+    def draw(self, surface, x, y):
+        xFrame = floor(self.frame) % self.spritesheet.xFrames
         self.spritesheet.draw(
             surface,
-            frame,
-            self.rowIndex,
-            x, y, width, height,
-            direction
+            xFrame,
+            self.yFrame,
+            x, y
         )
         return
 

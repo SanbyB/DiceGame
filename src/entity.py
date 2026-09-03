@@ -3,14 +3,10 @@ import numpy as np
 
 
 class Direction:
-    N = 0
-    NE = 1
-    E = 2
-    SE = 3
-    S = 4
-    SW = 5
-    W = 6
-    NW = 7
+    FORWARD = 0
+    BACKWARD = 1
+    LEFT = 2
+    RIGHT = 3
 
 class Entity:
     def __init__(self, name: str, pos=(0, 0)):
@@ -21,10 +17,11 @@ class Entity:
         self.y_vel = 0
         self.width = 40
         self.height = 64
-        self.direction = Direction.E
+        self.direction = Direction.FORWARD
         self.stepFreq = 0
-        self.speed = 1.2
-        self.sprint = 1
+        self.speed = 3
+        self.sprintSpeed = 1
+        self.sprintResetTime = 0
         self.animation = None
 
     def update(self):
@@ -37,17 +34,34 @@ class Entity:
             self.x_vel = np.sign(self.x_vel) * self.speed * np.cos(theta)
             self.y_vel = np.sign(self.y_vel) * self.speed * np.sin(theta)
         
-        self.x += self.x_vel * self.sprint
-        self.y += self.y_vel * self.sprint
+        self.x += self.x_vel * self.sprintSpeed
+        self.y += self.y_vel * self.sprintSpeed
 
-        self.x_vel = self.x_vel * 0.8
-        self.y_vel = self.y_vel * 0.8
+        self.x_vel = self.x_vel * 0.7
+        self.y_vel = self.y_vel * 0.7
 
-        if self.sprint == 1:
+        if self.x_vel < 0.01 and self.x_vel > -0.01:
+            self.x_vel = 0
+
+        if self.y_vel < 0.01 and self.y_vel > -0.01:
+            self.y_vel = 0
+
+        if self.sprintSpeed == 1:
             pass
-        elif self.sprint > 1:
-            self.sprint = self.sprint * 0.9
+        elif self.sprintSpeed > 1:
+            self.sprintSpeed = self.sprintSpeed * 0.9
         else:
-            self.sprint = 1
+            self.sprintSpeed = 1
+
+        if self.sprintResetTime == 0:
+            pass            
+        elif self.sprintResetTime > 0:
+            self.sprintResetTime -= 0.1
+        elif self.sprintResetTime < 0:
+            self.sprintResetTime = 0
+
+    def sprint(self, amount):
+        self.sprintSpeed = amount
+        self.sprintResetTime = 10
 
         
