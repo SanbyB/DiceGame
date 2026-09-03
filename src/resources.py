@@ -10,13 +10,9 @@ FONT = pygame.font.Font(os.path.join("Graphics", "ARCADECLASSIC.TTF"), 72)
 SMALLER_FONT = pygame.font.Font(os.path.join("Graphics", "ARCADECLASSIC.TTF"), 36)
 EVEN_SMALLER_FONT = pygame.font.Font(os.path.join("Graphics", "ARCADECLASSIC.TTF"), 28)
 
-LADYBIRD = SpriteSheet(pygame.image.load(os.path.join("Graphics", "ladyBird.png")), 4, 1)
-LADYBIRD_WALKING = Animation(LADYBIRD, 0, 0.1)
-
-PLANKS = pygame.image.load(os.path.join("Graphics", "planks.png"))
-PLANKS_SIZE = 75
-
 GROUND = pygame.image.load(os.path.join("Graphics", "groundTile.png"))
+TREE = pygame.image.load(os.path.join("Graphics", "tree.png"))
+
 
 class Wizard:
     WIZARD = SpriteSheet(pygame.image.load(os.path.join("Graphics", "wizard.png")), 4, 7)
@@ -35,9 +31,7 @@ class Wizard:
     WIZARD_LEFT_WALKING = Animation(WIZARD, 6, 0.1)
 
 class Warrior:
-    WARRIOR_SCALE = 1
     warrior = pygame.image.load(os.path.join("Graphics", "warrior.png"))
-    warrior = pygame.transform.scale(warrior, (warrior.get_width() * WARRIOR_SCALE, warrior.get_height() * WARRIOR_SCALE))
     WARRIOR = SpriteSheet(warrior, 4, 7)
     WARRIOR_FORWARD = Animation(WARRIOR, 0, 0)
     WARRIOR_RIGHT = Animation(WARRIOR, 3, 0)
@@ -52,3 +46,13 @@ class Warrior:
     WARRIOR_RIGHT_WALKING = Animation(WARRIOR, 3, 0.1)
     WARRIOR_LEFT_WALKING = Animation(WARRIOR, 5, 0.1)
     WARRIOR_BACKWARD_WALKING = Animation(WARRIOR, 2, 0.1)
+
+class SlimeSprite:
+    SLIME = pygame.image.load(os.path.join("Graphics", "slime.png"))
+    SLIME_SPRITESHEET = SpriteSheet(SLIME, 6, 1)
+    SLIME_IDLE = Animation(SLIME_SPRITESHEET, 0, 0.1)
+
+class DiceSprite:
+    DICE = pygame.image.load(os.path.join("Graphics", "dice.png"))
+    DICE_SPRITESHEET = SpriteSheet(DICE, 1, 1)
+    DICE_IDLE = Animation(DICE_SPRITESHEET, 0, 0)

@@ -5,9 +5,10 @@ from config import *
 from camera import Camera
 from world import World
 from player import Player
+from entities.slime import Slime
 
 pygame.init()
-pygame.mixer.init()
+pygame.mixer.init() # for sound fxs
 
 RUNNING = True
 
@@ -16,18 +17,25 @@ class Game:
         self.hasStarted = False
         self.hasFinished = False
         self.keysPressed = pygame.key.get_pressed()
+        self.mousePos = pygame.mouse.get_pos()
+        self.mousePressed = pygame.mouse.get_pressed()
         self.reset()
 
     def reset(self):
         self.cam = Camera()  
         self.world = World(self.cam)
         self.player = Player()
+        self.slime = Slime()
+        self.world.entities.append(self.slime)
         self.world.player = self.player
         self.world.camera = self.cam
-        pass
+        self.player.world = self.world
 
     def update(self):
-        keys = pygame.key.get_pressed()
+        self.keysPressed = pygame.key.get_pressed()
+        self.mousePos = pygame.mouse.get_pos()
+        self.mousePressed = pygame.mouse.get_pressed()
+
         if not self.hasStarted:
             # if keys[pygame.K_RETURN]:
             self.hasStarted = True
@@ -35,8 +43,10 @@ class Game:
             # else:
             #     return
             
-        self.player.keysPressed = keys
-        self.player.update()
+        self.player.keysPressed = self.keysPressed
+        self.player.mousePos = self.mousePos
+        self.player.mousePressed = self.mousePressed
+        self.world.update()
         self.cam.move(self.player)
         
 

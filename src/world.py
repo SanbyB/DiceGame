@@ -1,14 +1,24 @@
 import pygame
 from camera import Camera
-# from resources import PLANKS, PLANKS_SIZE
-from resources import GROUND
+from config import SCREEN_WIDTH, SCREEN_HEIGHT
+from resources import GROUND, TREE
 
 class World:
     def __init__(self, camera: Camera):
         self.camera = camera
         self.entities = []
         self.player = None
-        self.background_surface = pygame.Surface((800, 600))  # Create a surface for the background
+        self.background_surface = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))  # Create a surface for the background
+
+    def update(self):
+        # Update all entities in the world
+        for entity in self.entities:
+            if entity.hp <= 0:
+                self.entities.remove(entity)
+            entity.update()
+
+        if self.player:
+            self.player.update()
 
     def render(self, surface):
         # Render the background first
@@ -29,3 +39,5 @@ class World:
 
                 self.background_surface.blit(scaledImage, (x * 64 - self.camera.x, y * 64 - self.camera.y))
 
+    def addEntity(self, entity):
+        self.entities.append(entity)
