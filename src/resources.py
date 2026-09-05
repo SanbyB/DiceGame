@@ -31,7 +31,7 @@ class Wizard:
     WIZARD_LEFT_WALKING = Animation(WIZARD, 6, 0.1)
 
 class Warrior:
-    warrior = pygame.image.load(os.path.join("Graphics", "warrior.png"))
+    warrior = pygame.image.load(os.path.join("Graphics", "warriorDebug.png"))
     WARRIOR = SpriteSheet(warrior, 4, 7)
     WARRIOR_FORWARD = Animation(WARRIOR, 0, 0)
     WARRIOR_RIGHT = Animation(WARRIOR, 3, 0)
@@ -48,11 +48,11 @@ class Warrior:
     WARRIOR_BACKWARD_WALKING = Animation(WARRIOR, 2, 0.1)
 
 class SlimeSprite:
-    SLIME = pygame.image.load(os.path.join("Graphics", "slime.png"))
+    SLIME = pygame.image.load(os.path.join("Graphics", "slimeDebug.png"))
     SLIME_SPRITESHEET = SpriteSheet(SLIME, 6, 1)
     SLIME_IDLE = Animation(SLIME_SPRITESHEET, 0, 0.1)
 
 class DiceSprite:
-    DICE = pygame.image.load(os.path.join("Graphics", "dice.png"))
+    DICE = pygame.image.load(os.path.join("Graphics", "diceDebug.png"))
     DICE_SPRITESHEET = SpriteSheet(DICE, 1, 1)
     DICE_IDLE = Animation(DICE_SPRITESHEET, 0, 0)

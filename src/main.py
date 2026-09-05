@@ -34,6 +34,7 @@ class Game:
     def update(self):
         self.keysPressed = pygame.key.get_pressed()
         self.mousePos = pygame.mouse.get_pos()
+        self.mousePos = (self.mousePos[0] + self.cam.x, self.mousePos[1] + self.cam.y)
         self.mousePressed = pygame.mouse.get_pressed()
 
         if not self.hasStarted:
