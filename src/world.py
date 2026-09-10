@@ -1,7 +1,7 @@
 import pygame
-from camera import Camera
+from graphics.camera import Camera
 from config import SCREEN_WIDTH, SCREEN_HEIGHT
-from resources import GROUND
+from graphics.resources import GROUND
 from entities.dice import Dice
 
 class World:
@@ -14,6 +14,7 @@ class World:
         self.entities = []
         self.player = None
         self.objects = []  # List to hold all objects in the world
+        self.seeThroughObjects = []
 
 
     def update(self):
@@ -21,11 +22,6 @@ class World:
         # Handle collisions
         objects = self.entities + self.dice
         for entity in objects:
-            if entity.hp <= 0:
-                print(f"{entity.name} has been defeated!")
-                self.removeEntity(entity)
-                self.removeDice(entity)
-
             # player collides with everything but dice
             if entity.collidable and not isinstance(entity, Dice):
                 if self.player.checkCollide(entity):
@@ -40,6 +36,13 @@ class World:
                     if other_entity != entity and other_entity.collidable:
                         if entity.checkCollide(other_entity):
                             entity.resolveCollision(other_entity)
+
+        objects.append(self.player)
+        for obj in self.seeThroughObjects:
+            obj.animation = obj.state["default"]
+            for object in objects:
+                if obj.checkCollide(object, cover=True):
+                    obj.animation = obj.state["seeThrough"]
 
         # update everything
         for object in self.objects:
@@ -92,6 +95,16 @@ class World:
             self.dice.remove(dice)
         if dice in self.objects:
             self.objects.remove(dice)
+
+    def addSTObject(self, obj):
+            self.seeThroughObjects.append(obj)
+            self.objects.append(obj)
+    
+    def removeSTObject(self, obj):
+        if obj in self.seeThroughObjects:
+            self.seeThroughObjects.remove(obj)
+        if obj in self.objects:
+            self.objects.remove(obj)
 
     def addPlayer(self, player):
         self.player = player

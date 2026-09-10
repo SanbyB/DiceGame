@@ -1,8 +1,8 @@
 import random
 
-from animation import Animation
+from graphics.animation import Animation
 from object import Object
-from resources import Foliage
+from graphics.resources import Foliage
 
 
 class Bush(Object):
@@ -41,7 +41,9 @@ class SpruceTree(Object):
 class Rock(Object):
     def __init__(self, pos=(0, 0)):
         super().__init__(pos)
+        self.state = {"default": Foliage.ROCK, "seeThrough": Foliage.ROCK_ST}
         self.animation = Foliage.ROCK
         self.scale = 3
         self.width = self.animation.spritesheet.imageWidth * self.scale
         self.height = self.animation.spritesheet.imageHeight * self.scale
+        self.collidable = True

@@ -10,6 +10,8 @@ class Object:
         self.scale = 1.5
         self.angle = 0
 
+        self.collideable = False
+
     def update(self):
         if self.animation is not None:
             self.animation.update()
@@ -26,3 +28,27 @@ class Object:
                 rotate=self.angle,
                 scale=self.scale
             )
+
+    def checkCollide(self, other, cover=False):
+        if not self.collidable or not other.collidable:
+            return False
+        if cover:
+            # print(self.x - self.width/2 > other.x - other.width/2, \
+            # self.x + self.width/2 < other.x + other.width/2, \
+            # self.y - self.height/2 > other.y - other.height/2, \
+            # self.y + self.height/2 < other.y + other.height/2)
+            # if other.y < self.y:
+            #     return False
+            if self.x - self.width/2 < other.x and \
+            self.x + self.width/2 > other.x and \
+            self.y - self.height/2 < other.y and \
+            self.y > other.y:
+                return True
+        else:
+            if self.x - self.width/2 < other.x + other.width/2 and \
+            self.x + self.width/2 > other.x - other.width/2 and \
+            self.y - self.height/2 < other.y + other.height/2 and \
+            self.y + self.height/2 > other.y - other.height/2:
+                #print(f"Collision detected between {self.name} and {other.name}")
+                return True
+        return False

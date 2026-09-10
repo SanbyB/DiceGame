@@ -1,5 +1,5 @@
 from entity import Entity
-from resources import SpiderSprite
+from graphics.resources import SpiderSprite
 
 class Spider(Entity):
     def __init__(self, world, pos=(0, 0)):

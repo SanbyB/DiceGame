@@ -1,6 +1,6 @@
 import random
 from entity import Entity
-from resources import DiceSprite
+from graphics.resources import DiceSprite
 
 class Dice(Entity):
     def __init__(self, world, sides=6, pos=(0, 0)):

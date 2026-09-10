@@ -1,7 +1,7 @@
 import os.path
 import pygame
-from spritesheet import SpriteSheet
-from animation import Animation
+from graphics.spritesheet import SpriteSheet
+from graphics.animation import Animation
 
 pygame.init()
 
@@ -12,7 +12,9 @@ EVEN_SMALLER_FONT = pygame.font.Font(os.path.join("Graphics", "ARCADECLASSIC.TTF
 
 GROUND = pygame.image.load(os.path.join("Graphics", "groundTile.png"))
 
-WALL = pygame.image.load(os.path.join("Graphics", "wallTile.png"))
+class WallSprite:
+    WALL = SpriteSheet(pygame.image.load(os.path.join("Graphics", "wallTile.png")), 3, 3)
+
 
 class Foliage:
     TREE = SpriteSheet(pygame.image.load(os.path.join("Graphics", "tree.png")), 4, 1)
@@ -23,30 +25,35 @@ class Foliage:
 
     ROCK = SpriteSheet(pygame.image.load(os.path.join("Graphics", "rock.png")), 1, 1)
     ROCK = Animation(ROCK, 0, 0)
+    r = pygame.image.load(os.path.join("Graphics", "rock.png"))
+    r.fill((255, 255, 255, 120), None, pygame.BLEND_RGBA_MULT)
+    ROCK_ST = SpriteSheet(r, 1, 1)
+    ROCK_ST = Animation(ROCK_ST, 0, 0)
 
     BUSH = SpriteSheet(pygame.image.load(os.path.join("Graphics", "bush.png")), 4, 1)
     BUSH = Animation(BUSH, 0, 0.05)
 
     FLOWERS = SpriteSheet(pygame.image.load(os.path.join("Graphics", "flowers.png")), 8, 1)
 
-class Wizard:
-    WIZARD = SpriteSheet(pygame.image.load(os.path.join("Graphics", "wizard.png")), 4, 7)
-    WIZARD_FORWARD = Animation(WIZARD, 0, 0)
-    WIZARD_RIGHT = Animation(WIZARD, 1, 0)
-    WIZARD_LEFT = Animation(WIZARD, 2, 0)
-    WIZARD_BACKWARD = Animation(WIZARD, 5, 0)
+# class Wizard:
+#     WIZARD = SpriteSheet(pygame.image.load(os.path.join("Graphics", "wizard.png")), 4, 7)
+#     WIZARD_FORWARD = Animation(WIZARD, 0, 0)
+#     WIZARD_RIGHT = Animation(WIZARD, 1, 0)
+#     WIZARD_LEFT = Animation(WIZARD, 2, 0)
+#     WIZARD_BACKWARD = Animation(WIZARD, 5, 0)
 
-    WIZARD_FORWARD_IDLE = Animation(WIZARD, 0, 0.1)
-    WIZARD_RIGHT_IDLE = Animation(WIZARD, 1, 0.1)
-    WIZARD_LEFT_IDLE = Animation(WIZARD, 2, 0.1)
+#     WIZARD_FORWARD_IDLE = Animation(WIZARD, 0, 0.1)
+#     WIZARD_RIGHT_IDLE = Animation(WIZARD, 1, 0.1)
+#     WIZARD_LEFT_IDLE = Animation(WIZARD, 2, 0.1)
 
-    WIZARD_FORWARD_WALKING = Animation(WIZARD, 3, 0.1)
-    WIZARD_RIGHT_WALKING = Animation(WIZARD, 4, 0.1)
-    WIZARD_BACKWARD_WALKING = Animation(WIZARD, 5, 0.1)
-    WIZARD_LEFT_WALKING = Animation(WIZARD, 6, 0.1)
+#     WIZARD_FORWARD_WALKING = Animation(WIZARD, 3, 0.1)
+#     WIZARD_RIGHT_WALKING = Animation(WIZARD, 4, 0.1)
+#     WIZARD_BACKWARD_WALKING = Animation(WIZARD, 5, 0.1)
+#     WIZARD_LEFT_WALKING = Animation(WIZARD, 6, 0.1)
 
 class Warrior:
-    warrior = pygame.image.load(os.path.join("Graphics", "warriorDebug.png"))
+    # warrior = pygame.image.load(os.path.join("Graphics", "warriorDebug.png"))
+    warrior = pygame.image.load(os.path.join("Graphics", "warrior.png"))
     WARRIOR = SpriteSheet(warrior, 4, 7)
     WARRIOR_FORWARD = Animation(WARRIOR, 0, 0)
     WARRIOR_RIGHT = Animation(WARRIOR, 3, 0)

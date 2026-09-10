@@ -1,5 +1,5 @@
 from entity import Entity
-from resources import SlimeSprite
+from graphics.resources import SlimeSprite
 
 
 class Slime(Entity):

@@ -23,7 +23,7 @@ class Entity(Object):
         self.x_acc = 0
         self.y_acc = 0
 
-        self.speed = 2
+        self.speed = 4
         self.speedDamp = 0.7
         self.sprintSpeed = 1
         self.sprintResetTime = 0
@@ -103,17 +103,6 @@ class Entity(Object):
         elif self.sprintResetTime < 0:
             self.sprintResetTime = 0
 
-    def checkCollide(self, other):
-        if not self.collidable or not other.collidable:
-            return False
-        if self.x - self.width/2 < other.x + other.width/2 and \
-           self.x + self.width/2 > other.x - other.width/2 and \
-           self.y - self.height/2 < other.y + other.height/2 and \
-           self.y + self.height/2 > other.y - other.height/2:
-            #print(f"Collision detected between {self.name} and {other.name}")
-            return True
-        else:
-            return False
 
     def resolveCollision(self, other): # TODO change the amount of movement in the direction that is not being collided with
         if self.x < other.x:
@@ -145,4 +134,6 @@ class Entity(Object):
             self.damageCooldown = 10  # Set a cooldown period
             if self.hp <= 0:
                 self.hp = 0
+                self.world.removeEntity(self)
+                self.world.removeDice(self)
                 # Handle entity death here (e.g., remove from world, play animation, etc.)

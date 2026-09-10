@@ -2,7 +2,7 @@ import pygame
 import numpy as np
 from entity import *
 from entities.dice import Dice
-from resources import Warrior
+from graphics.resources import Warrior
 
 WALK_ACCN = 0.5
 
@@ -58,7 +58,7 @@ class Player(Entity):
             self.y_acc = WALK_ACCN
 
         if self.keysPressed[pygame.K_SPACE] and self.sprintResetTime == 0 and self.keyUp["space"]:
-            self.sprint(4) # make configurable later
+            self.sprint(3) # make configurable later
             self.keyUp["space"] = False
             
         if not self.keysPressed[pygame.K_SPACE]:
