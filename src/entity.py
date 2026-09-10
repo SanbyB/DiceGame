@@ -1,5 +1,5 @@
-
 import numpy as np
+from object import Object
 
 WALK_ACCN = 0.5
 COLLIDE_ACCN = 2 * WALK_ACCN
@@ -10,12 +10,14 @@ class Direction:
     LEFT = 2
     RIGHT = 3
 
-class Entity:
-    def __init__(self, name: str, pos=(0, 0)):
+class Entity(Object):
+    def __init__(self, name: str, world, pos=(0, 0)):
+        super().__init__(pos)
+
         self.name = name
 
-        self.x = pos[0]
-        self.y = pos[1]
+        self.world = world
+
         self.x_vel = 0
         self.y_vel = 0
         self.x_acc = 0
@@ -31,9 +33,9 @@ class Entity:
         self.width = 0
         self.height = 0
         self.animation = None
-        self.scale = 1.5
 
         self.hp = 1
+        self.damageCooldown = 0
         
         # vars determine if an entity needs to be checked for collisions
         # if an entity is not moveable then it doesn't need to check collisions
@@ -43,8 +45,10 @@ class Entity:
 
 
     def update(self):
+        super().update()
         self.move()
-        self.animation.update()
+        if self.damageCooldown > 0:
+            self.damageCooldown -= 1
 
 
     def move(self):
@@ -82,13 +86,13 @@ class Entity:
 
     def sprint(self, amount):
         self.sprintSpeed = amount
-        self.sprintResetTime = 10 # make configurable later
+        self.sprintResetTime = 8 # make configurable later
 
     def sprintCooldown(self):
         if self.sprintSpeed == 1:
             pass
         elif self.sprintSpeed > 1:
-            self.sprintSpeed = self.sprintSpeed * 0.9
+            self.sprintSpeed = self.sprintSpeed * 0.97
         else:
             self.sprintSpeed = 1
 
@@ -98,19 +102,6 @@ class Entity:
             self.sprintResetTime -= 0.1
         elif self.sprintResetTime < 0:
             self.sprintResetTime = 0
-
-    def render(self, screen, camera):
-        xPos = self.x - camera.x
-        yPos = self.y - camera.y
-        
-        # Render the entity on the screen
-        self.animation.draw(
-            surface=screen,
-            x=xPos,
-            y=yPos,
-            rotate=0,
-            scale=self.scale
-        )
 
     def checkCollide(self, other):
         if not self.collidable or not other.collidable:
@@ -141,3 +132,17 @@ class Entity:
             self.y_acc = COLLIDE_ACCN
             if other.moveable:
                 other.y_acc = -COLLIDE_ACCN
+
+        if self.name == "Dice" and other.name in ["Slime", "Spider"]:
+            other.takeDamage(self.currentRoll)
+            if other.hp <= 0:
+                # self.world.removeDice(self)
+                pass
+
+    def takeDamage(self, amount):
+        if self.damageCooldown <= 0:
+            self.hp -= amount
+            self.damageCooldown = 10  # Set a cooldown period
+            if self.hp <= 0:
+                self.hp = 0
+                # Handle entity death here (e.g., remove from world, play animation, etc.)

@@ -29,6 +29,9 @@ class Animation:
     def reset(self):
         self.frame = 0
 
+    def setFrame(self, frame):
+        self.frame = frame
+
 
 
 

@@ -1,3 +1,4 @@
+import random
 import sys
 import pygame
 from pygame.locals import *
@@ -6,6 +7,9 @@ from camera import Camera
 from world import World
 from player import Player
 from entities.slime import Slime
+from entities.spider import Spider
+from entities.wall import Wall
+from objects.foliage import Bush, Rock, SpruceTree, Tree, Flowers
 
 pygame.init()
 pygame.mixer.init() # for sound fxs
@@ -24,12 +28,26 @@ class Game:
     def reset(self):
         self.cam = Camera()  
         self.world = World(self.cam)
-        self.player = Player()
-        self.slime = Slime()
-        self.world.entities.append(self.slime)
-        self.world.player = self.player
         self.world.camera = self.cam
-        self.player.world = self.world
+
+        self.player = Player(self.world)
+
+        self.world.addPlayer(self.player)
+
+        self.world.addEntity(Slime(self.world, pos=(100, 100)))
+        self.world.addEntity(Spider(self.world, pos=(-100, -100)))
+
+        self.world.addEntity(Wall(self.world, pos=(-150,-300)))
+
+        self.world.addObject(Bush(pos=(200, 200)))
+        self.world.addObject(Tree(pos=(100, 300)))
+        self.world.addObject(SpruceTree(pos=(0, 0)))
+        self.world.addObject(Rock(pos=(100, 100)))
+        
+        self.world.addObject(Flowers(pos=(300, 200), speed = random.uniform(0.005, 0.05)))
+        self.world.addObject(Flowers(pos=(-60, 20), speed = random.uniform(0.005, 0.05)))
+        self.world.addObject(Flowers(pos=(30, -80), speed = random.uniform(0.005, 0.05)))
+
 
     def update(self):
         self.keysPressed = pygame.key.get_pressed()

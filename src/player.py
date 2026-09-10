@@ -7,8 +7,8 @@ from resources import Warrior
 WALK_ACCN = 0.5
 
 class Player(Entity):
-    def __init__(self):
-        super().__init__("Player")
+    def __init__(self, world):
+        super().__init__("Player", world)
 
         self.keysPressed = []
         self.mousePressed = []
@@ -22,10 +22,11 @@ class Player(Entity):
         self.spaceUp = True
         self.keyUp = {"space": True, "leftClick": True, "rightClick": True}
         
-        self.world = None
         self.moveable = True
         self.colliding = False
         # self.collidable = False
+
+        self.totalDice = 10
 
     def update(self):
         if self.stateSwitchTime == 0:
@@ -57,7 +58,7 @@ class Player(Entity):
             self.y_acc = WALK_ACCN
 
         if self.keysPressed[pygame.K_SPACE] and self.sprintResetTime == 0 and self.keyUp["space"]:
-            self.sprint(10) # make configurable later
+            self.sprint(4) # make configurable later
             self.keyUp["space"] = False
             
         if not self.keysPressed[pygame.K_SPACE]:
@@ -119,7 +120,10 @@ class Player(Entity):
     def keyCheck(self):
         if self.mousePressed[2] and self.keyUp["rightClick"]:
             self.keyUp["rightClick"] = False
-            self.spawnDice()
+            if self.pickupDice():
+                pass
+            else:
+                self.spawnDice()
         
         elif not self.mousePressed[2]:
             self.keyUp["rightClick"] = True
@@ -132,22 +136,37 @@ class Player(Entity):
             self.keyUp["leftClick"] = True
 
     def spawnDice(self):
-        dice = Dice(pos=(self.x, self.y))
-        if self.world is not None:
-            self.world.addEntity(dice)
-        else:
-            print("World is not set for player, cannot spawn dice.")
+        if self.world is not None and len(self.world.dice) < self.totalDice:
+            x = (self.mousePos[0] - self.x)
+            y = (self.mousePos[1] - self.y)
+            if abs(x) < 0.01:
+                x = 0.01
+            y_x = y / x
+            offset_x = np.sign(x) * np.sqrt(self.width ** 2 + self.height ** 2) / (2 * np.sqrt(1 + y_x ** 2))
+            offset_y = np.sign(x) * np.sqrt(self.width ** 2 + self.height ** 2) * y_x / (2 * np.sqrt(1 + y_x ** 2))
+
+            dice = Dice(world = self.world, pos=(self.x + offset_x, self.y + offset_y))
+            self.world.addDice(dice)
+
         
     def hitDice(self):
-        for entity in self.world.entities:
-            if isinstance(entity, Dice):
-                if self.mousePos[0] >= entity.x - entity.width/2 and self.mousePos[0] <= entity.x + entity.width/2\
-                   and self.mousePos[1] >= entity.y - entity.height/2 and self.mousePos[1] <= entity.y + entity.height/2:
-                    entity.roll(((self.mousePos[0] - self.x)*10, (self.mousePos[1] - self.y)*10))
+        for dice in self.world.dice:
+            if dice.inrange:
+                if self.mousePos[0] >= dice.x - dice.width/2 and self.mousePos[0] <= dice.x + dice.width/2\
+                    and self.mousePos[1] >= dice.y - dice.height/2 and self.mousePos[1] <= dice.y + dice.height/2:
+                    dice.roll(((self.mousePos[0] - self.x)*10, (self.mousePos[1] - self.y)*10))
                     return True
         return False
         
-        
+    def pickupDice(self):
+        for dice in self.world.dice:
+            if not dice.inrange:
+                continue
+            if self.mousePos[0] >= dice.x - dice.width/2 and self.mousePos[0] <= dice.x + dice.width/2\
+                and self.mousePos[1] >= dice.y - dice.height/2 and self.mousePos[1] <= dice.y + dice.height/2:
+                self.world.removeDice(dice)
+                return True
+        return False
 
 
     
