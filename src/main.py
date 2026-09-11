@@ -5,12 +5,14 @@ from pygame.locals import *
 from config import *
 from graphics.camera import Camera
 from world import World
-from player import Player
-from entities.slime import Slime
-from entities.spider import Spider
-from entities.wall import Wall
-from objects.foliage import Bush, Rock, SpruceTree, Tree, Flowers
-import time
+# from player import Player
+# from entities.slime import Slime
+# from entities.spider import Spider
+# from entities.wall import Wall
+# from objects.foliage import Bush, Rock, SpruceTree, Tree, Flowers
+# import time
+
+from mapLoader import MapLoader
 
   
 
@@ -33,25 +35,29 @@ class Game:
         self.world = World(self.cam)
         self.world.camera = self.cam
 
-        self.player = Player(self.world)
+        maploader = MapLoader(self.world)
+        maploader.loadMap()
+        self.player = self.world.player
 
-        self.world.addPlayer(self.player)
+        # self.player = Player(self.world, (200, 100))
 
-        self.world.addEntity(Slime(self.world, pos=(1000, 0)))
-        self.world.addEntity(Spider(self.world, pos=(-100, 0)))
+        # self.world.addPlayer(self.player)
 
-        self.world.addEntity(Wall(self.world, pos=(-1,-3)))
-        self.world.addEntity(Wall(self.world, pos=(-1,-2)))
+        # self.world.addEntity(Slime(self.world, pos=(1000, 0)))
+        # self.world.addEntity(Spider(self.world, pos=(-100, 0)))
+
+        # self.world.addEntity(Wall(self.world, pos=(-1,-3)))
+        # self.world.addEntity(Wall(self.world, pos=(-1,-2)))
 
 
-        self.world.addObject(Bush(pos=(200, 200)))
-        self.world.addObject(Tree(pos=(100, 300)))
-        self.world.addObject(SpruceTree(pos=(0, 0)))
-        self.world.addSTObject(Rock(pos=(100, 100)))
+        # self.world.addObject(Bush(pos=(200, 200)))
+        # self.world.addObject(Tree(pos=(100, 300)))
+        # self.world.addObject(SpruceTree(pos=(0, 0)))
+        # self.world.addSTObject(Rock(pos=(100, 100)))
         
-        self.world.addObject(Flowers(pos=(300, 200), speed = random.uniform(0.005, 0.05)))
-        self.world.addObject(Flowers(pos=(-60, 20), speed = random.uniform(0.005, 0.05)))
-        self.world.addObject(Flowers(pos=(30, -80), speed = random.uniform(0.005, 0.05)))
+        # self.world.addObject(Flowers(pos=(300, 200), speed = random.uniform(0.005, 0.05)))
+        # self.world.addObject(Flowers(pos=(-60, 20), speed = random.uniform(0.005, 0.05)))
+        # self.world.addObject(Flowers(pos=(30, -80), speed = random.uniform(0.005, 0.05)))
 
 
     def update(self):
@@ -92,7 +98,8 @@ while RUNNING:
     # startTime = time.time() # Record when the loop was started    
     dt = clock.tick(60)
     # Clear the screen
-    # pygame.draw.rect(DISPLAYSURF, (0, 0, 0, 255), Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT))
+    # pygame.draw.rect(DISPLAYSURF, (217, 160, 102, 255), Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT))
+    DISPLAYSURF.fill((238, 195, 154, 255))
     game.update()
     game.render(DISPLAYSURF)
     for event in pygame.event.get():
@@ -104,5 +111,6 @@ while RUNNING:
     # HowLong = time.time() - startTime
     # print(HowLong)
 
+    # pygame.display.flip()
     
     pygame.display.update()

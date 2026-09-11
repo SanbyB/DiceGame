@@ -7,8 +7,10 @@ from graphics.resources import Warrior
 WALK_ACCN = 0.5
 
 class Player(Entity):
-    def __init__(self, world):
+    def __init__(self, world, pos=(0, 0)):
         super().__init__("Player", world)
+
+        self.x, self.y = pos
 
         self.keysPressed = []
         self.mousePressed = []

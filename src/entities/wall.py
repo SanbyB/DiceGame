@@ -10,7 +10,7 @@ class Wall(Entity):
         imgWidth = self.spriteSheet.imageWidth * scale
         imgHeight = self.spriteSheet.imageHeight * scale
 
-        pos = (pos[0] * imgWidth, pos[1] * imgHeight)
+        # pos = (pos[0] * imgWidth, pos[1] * imgHeight)
 
         super().__init__("wall", world, pos)
 

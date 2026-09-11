@@ -50,10 +50,9 @@ class World:
 
     def render(self, surface):
         # Render the background first
-        self.backgroundRender()
-        surface.blit(self.background_surface, (0, 0))  # Blit the background surface onto the main surface
+        # self.backgroundRender()
+        # surface.blit(self.background_surface, (0, 0))  # Blit the background surface onto the main surface
 
-        ## TODO if there is an object behind another the front object alpha should be reduced to make it look like the player is behind the object
         self.objects.sort(key=lambda obj: obj.y + obj.height/2)  # Sort objects by their y-coordinate for proper rendering order
         # Render all objects in the world
         for object in self.objects:

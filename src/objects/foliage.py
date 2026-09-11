@@ -33,10 +33,12 @@ class Flowers(Object):
 class SpruceTree(Object):
     def __init__(self, pos=(0, 0)):
         super().__init__(pos)
+        self.state = {"default": Foliage.SPRUCE_TREE, "seeThrough": Foliage.SPRUCE_TREE_ST}
         self.animation = Foliage.SPRUCE_TREE
         self.scale = 4
         self.width = self.animation.spritesheet.imageWidth * self.scale
         self.height = self.animation.spritesheet.imageHeight * self.scale
+        self.collidable = True
 
 class Rock(Object):
     def __init__(self, pos=(0, 0)):

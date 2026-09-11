@@ -1,5 +1,6 @@
 import os.path
 import pygame
+from PIL import Image
 from graphics.spritesheet import SpriteSheet
 from graphics.animation import Animation
 
@@ -9,6 +10,9 @@ FONT = 0
 FONT = pygame.font.Font(os.path.join("Graphics", "ARCADECLASSIC.TTF"), 72)
 SMALLER_FONT = pygame.font.Font(os.path.join("Graphics", "ARCADECLASSIC.TTF"), 36)
 EVEN_SMALLER_FONT = pygame.font.Font(os.path.join("Graphics", "ARCADECLASSIC.TTF"), 28)
+
+MAP = Image.open(os.path.join("Graphics", "map1.png"))
+# MAP = pygame.image.load(os.path.join("Graphics", "map1.png"))
 
 GROUND = pygame.image.load(os.path.join("Graphics", "groundTile.png"))
 
@@ -22,6 +26,10 @@ class Foliage:
 
     SPRUCE_TREE = SpriteSheet(pygame.image.load(os.path.join("Graphics", "spruceTree.png")), 1, 1)
     SPRUCE_TREE = Animation(SPRUCE_TREE, 0, 0)
+    st = pygame.image.load(os.path.join("Graphics", "spruceTree.png"))
+    st.fill((255, 255, 255, 120), None, pygame.BLEND_RGBA_MULT)
+    SPRUCE_TREE_ST = SpriteSheet(st, 1, 1)
+    SPRUCE_TREE_ST = Animation(SPRUCE_TREE_ST, 0, 0)
 
     ROCK = SpriteSheet(pygame.image.load(os.path.join("Graphics", "rock.png")), 1, 1)
     ROCK = Animation(ROCK, 0, 0)
@@ -72,7 +80,7 @@ class Warrior:
 class SlimeSprite:
     SLIME = pygame.image.load(os.path.join("Graphics", "slime.png"))
     SLIME_SPRITESHEET = SpriteSheet(SLIME, 6, 1)
-    SLIME_IDLE = Animation(SLIME_SPRITESHEET, 0, 0.1)
+    SLIME_IDLE = Animation(SLIME_SPRITESHEET, 0, 0.03)
 
 class SpiderSprite:
     SPIDER = pygame.image.load(os.path.join("Graphics", "spider.png"))

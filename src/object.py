@@ -10,7 +10,7 @@ class Object:
         self.scale = 1.5
         self.angle = 0
 
-        self.collideable = False
+        self.collidable = False
 
     def update(self):
         if self.animation is not None:
@@ -42,7 +42,7 @@ class Object:
             if self.x - self.width/2 < other.x and \
             self.x + self.width/2 > other.x and \
             self.y - self.height/2 < other.y and \
-            self.y > other.y:
+            self.y + self.height/2 > other.y + other.height/2:
                 return True
         else:
             if self.x - self.width/2 < other.x + other.width/2 and \
