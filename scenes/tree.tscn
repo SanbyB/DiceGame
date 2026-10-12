@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://duf43pgsb8y3c"]
+
+[ext_resource type="Texture2D" uid="uid://cixxukb0ck331" path="res://Graphics/tree.png" id="1_avsvi"]
+
+[node name="Tree" type="Sprite2D" unique_id=1695636742]
+z_as_relative = false
+y_sort_enabled = true
+scale = Vector2(3, 3)
+texture = ExtResource("1_avsvi")
+offset = Vector2(0, -16)

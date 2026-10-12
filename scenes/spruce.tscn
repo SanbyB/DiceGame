@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://blr11liyl42wo"]
+
+[ext_resource type="Texture2D" uid="uid://dg2hlhdopafuf" path="res://Graphics/spruceTree.png" id="1_asoqo"]
+
+[node name="Spruce" type="Sprite2D" unique_id=1733633185]
+z_as_relative = false
+y_sort_enabled = true
+scale = Vector2(3, 3)
+texture = ExtResource("1_asoqo")
+offset = Vector2(0, -16)
