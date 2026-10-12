@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://70bejblf05h5" path="res://scripts/grass.gd" id="1_3kunl"]
 [ext_resource type="Texture2D" uid="uid://c6g116jkthmt6" path="res://Graphics/grassRight.png" id="2_u68v2"]
 [ext_resource type="Texture2D" uid="uid://krrfcnkpdqx3" path="res://Graphics/grassLeft.png" id="3_cvbpf"]
+[ext_resource type="Texture2D" uid="uid://1c8tprrbnyvg" path="res://Graphics/shadow.png" id="4_u68v2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mcmht"]
 radius = 4.013865
@@ -10,7 +11,7 @@ radius = 4.013865
 [node name="Grass" type="Area2D" unique_id=809953041]
 z_as_relative = false
 y_sort_enabled = true
-scale = Vector2(3, 3)
+scale = Vector2(2, 2)
 script = ExtResource("1_3kunl")
 
 [node name="left" type="Sprite2D" parent="." unique_id=2036061886]
@@ -36,3 +37,11 @@ z_as_relative = false
 y_sort_enabled = true
 position = Vector2(-0.33333334, -4.3333335)
 shape = SubResource("CircleShape2D_mcmht")
+
+[node name="shadow" type="Sprite2D" parent="." unique_id=1943534406]
+z_index = -1
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(-0.3333333, -0.33333334)
+scale = Vector2(0.25000003, 0.29166666)
+texture = ExtResource("4_u68v2")

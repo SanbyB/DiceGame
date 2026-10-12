@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://dms5i6ee8gp7i"]
+
+[ext_resource type="Script" uid="uid://dxlc45xwwj4yc" path="res://scripts/flower.gd" id="1_yoh7s"]
+[ext_resource type="Texture2D" uid="uid://lb8limd4nhi3" path="res://Graphics/flowerRed.png" id="2_agc10"]
+[ext_resource type="Texture2D" uid="uid://1c8tprrbnyvg" path="res://Graphics/shadow.png" id="3_agc10"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mcmht"]
+radius = 5.0
+
+[node name="Flower" type="Area2D" unique_id=1139360180]
+z_as_relative = false
+y_sort_enabled = true
+scale = Vector2(2, 2)
+script = ExtResource("1_yoh7s")
+
+[node name="flower1" type="Sprite2D" parent="." unique_id=636010269]
+texture = ExtResource("2_agc10")
+offset = Vector2(0, -8)
+region_enabled = true
+region_rect = Rect2(0, 16, 16, 16)
+
+[node name="flower2" type="Sprite2D" parent="." unique_id=112279254]
+texture = ExtResource("2_agc10")
+offset = Vector2(0, -8)
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 16)
+
+[node name="flower3" type="Sprite2D" parent="." unique_id=797445915]
+texture = ExtResource("2_agc10")
+offset = Vector2(0, -8)
+region_enabled = true
+region_rect = Rect2(0, 48, 16, 16)
+
+[node name="Base" type="Sprite2D" parent="." unique_id=1346872175]
+z_as_relative = false
+y_sort_enabled = true
+texture = ExtResource("2_agc10")
+offset = Vector2(0, -8)
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=871228780]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_mcmht")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1622455630]
+z_index = -1
+position = Vector2(-0.33333337, -1.1666666)
+scale = Vector2(0.5416667, 0.7083333)
+texture = ExtResource("3_agc10")

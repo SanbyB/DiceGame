@@ -6,8 +6,8 @@ var ACCEL = 50000
 var acceleration = ACCEL
 var direction = Vector2(0, 0)
 var angularVel = 0
-var dampAngle = 0.9
-var angleSpeed = 10
+var dampAngle = 0.93
+var angleSpeed = 5
 
 @export var inRange = false
 @onready var player = $"../Player"
@@ -37,6 +37,7 @@ func _physics_process(_delta):
 	if collision:
 		# Reflect the velocity vector using the collision normal
 		velocity = velocity.bounce(collision.get_normal())
+		#TODO
 		if collision.get_collider().name == "Slime":
 			collision.get_collider().hp -= 50
 			print(collision.get_collider().hp)
@@ -67,9 +68,10 @@ func _on_collideable_area_input_event(viewport: Node, event: InputEvent, shape_i
 func move():
 	velocity = Vector2(0, 0)
 	acceleration = ACCEL
-	direction = player.get_position().direction_to(position)
+	# add the vector of the Node2D transform of position (this is done to ensure draw order)
+	direction = player.get_position().direction_to(position + Vector2(0, -12))
 	rollNumber = randi_range(1, 6)
-	angularVel = randf() * angleSpeed
+	angularVel = randf() * angleSpeed * sign(direction[0])
 	
 func animState():
 	if inRange:

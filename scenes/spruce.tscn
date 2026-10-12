@@ -1,10 +1,18 @@
 [gd_scene format=3 uid="uid://blr11liyl42wo"]
 
 [ext_resource type="Texture2D" uid="uid://dg2hlhdopafuf" path="res://Graphics/spruceTree.png" id="1_asoqo"]
+[ext_resource type="Texture2D" uid="uid://1c8tprrbnyvg" path="res://Graphics/shadow.png" id="2_n65lb"]
 
 [node name="Spruce" type="Sprite2D" unique_id=1733633185]
 z_as_relative = false
 y_sort_enabled = true
-scale = Vector2(3, 3)
+scale = Vector2(2, 2)
 texture = ExtResource("1_asoqo")
 offset = Vector2(0, -16)
+
+[node name="shadow" type="Sprite2D" parent="." unique_id=542657136]
+modulate = Color(1, 1, 1, 0.7254902)
+z_index = -1
+position = Vector2(0.666667, 0)
+scale = Vector2(1.2083334, 1)
+texture = ExtResource("2_n65lb")

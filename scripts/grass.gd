@@ -3,7 +3,7 @@ extends Area2D
 @onready var sprite_l: Sprite2D = $left
 @onready var sprite_r: Sprite2D = $right
 
-@onready var rand: float = randf_range(2.4, 2.7)
+@onready var rand: float = randf_range(2, 2.3)
 
 var time: float = 0
 

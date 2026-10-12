@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c5cp5p0kdcuww" path="res://Graphics/dice.png" id="1_27nyo"]
 [ext_resource type="Script" uid="uid://c171bknt1r77u" path="res://scripts/dice.gd" id="1_mg5ex"]
+[ext_resource type="Texture2D" uid="uid://1c8tprrbnyvg" path="res://Graphics/shadow.png" id="3_oi81l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mg5ex"]
 atlas = ExtResource("1_27nyo")
@@ -254,12 +255,16 @@ radius = 110.0409
 size = Vector2(26, 26)
 
 [node name="Dice" type="CharacterBody2D" unique_id=1102611535]
+scale = Vector2(0.75, 0.75)
 collision_layer = 2
 collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_mg5ex")
+speed = 3000
+dampSpeed = 0.95
 
 [node name="DiceSprite" type="AnimatedSprite2D" parent="." unique_id=2081737422]
+position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_mcmht")
 animation = &"dice"
 autoplay = "1"
@@ -274,10 +279,18 @@ shape = SubResource("CircleShape2D_mcmht")
 [node name="CollideableArea" type="Area2D" parent="." unique_id=1210561255]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollideableArea" unique_id=250577781]
+position = Vector2(0, -12)
 shape = SubResource("RectangleShape2D_mcmht")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1411162438]
+position = Vector2(0, -12)
 shape = SubResource("RectangleShape2D_mcmht")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1330231718]
+z_index = -1
+position = Vector2(1.7881393e-07, 2.7499993)
+scale = Vector2(1.8750001, 1.5624998)
+texture = ExtResource("3_oi81l")
 
 [connection signal="body_entered" from="InrangeArea" to="." method="_on_inrange_area_body_entered"]
 [connection signal="body_exited" from="InrangeArea" to="." method="_on_inrange_area_body_exited"]
