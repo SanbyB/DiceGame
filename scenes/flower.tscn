@@ -48,3 +48,6 @@ z_index = -1
 position = Vector2(-0.33333337, -1.1666666)
 scale = Vector2(0.5416667, 0.7083333)
 texture = ExtResource("3_agc10")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

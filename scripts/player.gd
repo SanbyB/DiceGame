@@ -14,17 +14,23 @@ var inputDirection : Vector2 = Vector2(0, 0)
 var direction = "towards"
 
 var sprint: bool = false
+var sprint_timer: float = 0
 
 @onready var animatedSprite : AnimatedSprite2D = $PlayerSprite
 
 
 func get_input():
 	inputDirection = Input.get_vector("left", "right", "up", "down")
-	sprint = Input.is_action_just_pressed("space")
+	if sprint_timer == 0:
+		sprint = Input.is_action_just_pressed("space")
+	if sprint:
+		sprint_timer = 2
 	if Input.is_action_just_pressed("rightClick") and dice == null:
 		var die = Dice.instantiate()
-		die.position = get_global_mouse_position()
-		## TODO have the dice spawn a specific dist from the player
+		var pos = get_global_mouse_position()
+		if (pos - position).length() > 100:
+			pos = position + position.direction_to(pos) * 100
+		die.position = pos
 		get_parent().add_child(die)
 		dice = die
 	
@@ -33,6 +39,7 @@ func move(_delta):
 	
 	if sprint:
 		vel = sprintSpeed
+		sprint = false
 	
 	if vel > speed:
 		vel *= dampSprint
@@ -52,6 +59,10 @@ func move(_delta):
 		
 		
 func _physics_process(_delta):
+	if sprint_timer > 0:
+		sprint_timer -= _delta
+	elif sprint_timer < 0:
+		sprint_timer = 0
 	get_input()
 	move(_delta)
 	move_and_slide()

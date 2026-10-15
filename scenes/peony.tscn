@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cqs16dkpdqu5q"]
+
+[ext_resource type="Script" uid="uid://wt1rj1rgakqs" path="res://scripts/peony.gd" id="1_xiijd"]
+[ext_resource type="Texture2D" uid="uid://1c8tprrbnyvg" path="res://Graphics/shadow.png" id="2_ihaa6"]
+[ext_resource type="Texture2D" uid="uid://21sginn5xmk7" path="res://Graphics/peony.png" id="3_np37u"]
+
+[node name="peony" type="Node2D" unique_id=1140839127]
+z_as_relative = false
+y_sort_enabled = true
+scale = Vector2(2, 2)
+script = ExtResource("1_xiijd")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1931523947]
+z_index = -1
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(-1.1920929e-07, -0.49999994)
+scale = Vector2(0.625, 0.625)
+texture = ExtResource("2_ihaa6")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1997009937]
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(0, -2)
+texture = ExtResource("3_np37u")
+offset = Vector2(0, -6)

@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://ckokruowl1iic"]
+
+[ext_resource type="Texture2D" uid="uid://cgtkwaepntyw7" path="res://Graphics/hay.png" id="1_wdxmm"]
+[ext_resource type="Script" uid="uid://cvlthb1vx5vrq" path="res://scripts/hay.gd" id="2_aiu2a"]
+[ext_resource type="Texture2D" uid="uid://1c8tprrbnyvg" path="res://Graphics/shadow.png" id="3_87nnp"]
+
+[node name="Hay" type="Node2D" unique_id=1576301]
+z_as_relative = false
+y_sort_enabled = true
+scale = Vector2(2, 2)
+script = ExtResource("2_aiu2a")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=974016839]
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(0, -2)
+texture = ExtResource("1_wdxmm")
+offset = Vector2(0, -6)
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=2131454603]
+z_index = -1
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(-5.9604645e-08, -0.25000006)
+scale = Vector2(0.49999997, 0.5625)
+texture = ExtResource("3_87nnp")
